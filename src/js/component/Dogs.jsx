@@ -13,6 +13,10 @@ const Dogs = () => {
 			SetAnimal(news);
 		}
 	};
+	const deleteAnimal = animalID => {
+		const newArray = animals.filter(animal => animal.id != animalID);
+		SetAnimal(newArray);
+	};
 
 	return (
 		<div>
@@ -21,11 +25,18 @@ const Dogs = () => {
 				value={newAnimal}
 				onChange={e => SetNewAnimal(e.target.value)}
 			/>
-			<button onClick={addAnimal}>Add</button>
+			<button onClick={() => addAnimal()}>Add</button>
 
 			<ol>
 				{animals.map(animal => {
-					return <li key={animal.id}>{animal.name}</li>;
+					return (
+						<li key={animal.id}>
+							{animal.name}
+							<button onClick={() => deleteAnimal(animal.id)}>
+								Delete
+							</button>
+						</li>
+					);
 				})}
 			</ol>
 		</div>
